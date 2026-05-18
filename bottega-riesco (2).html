@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>La Bottega × Riesco Repostería</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream:   #F8F5EF;
+      --warm:    #EDE4D3;
+      --brown:   #6B4F3A;
+      --dark:    #6B4F3A;
+      --gold:    #C98A3A;
+      --accent:  #C62828;
+      --text:    #6B4F3A;
+      --light:   #F8F5EF;
+      --border:  rgba(201,138,58,0.2);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Jost', sans-serif;
+      background: var(--light);
+      color: var(--text);
+      min-height: 100vh;
+      width: 100%;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 100svh;
+      min-height: 520px;
+      overflow: hidden;
+    }
+
+    .hero img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center center;
+      display: block;
+    }
+
+    @media (max-width: 600px) {
+      .hero {
+        height: 85svh;
+        min-height: 480px;
+      }
+      .hero img {
+        object-position: 60% center;
+      }
+      .hero-overlay {
+        padding-bottom: 40px;
+      }
+      .hero h1 {
+        font-size: 2rem;
+      }
+    }
+
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom,
+        rgba(44,31,20,0.15) 0%,
+        rgba(44,31,20,0.55) 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      padding-bottom: 60px;
+      text-align: center;
+    }
+
+    .hero-logo {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .hero-logo span {
+      color: var(--cream);
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1rem, 2.5vw, 1.35rem);
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .hero-logo .sep {
+      color: var(--gold);
+      font-size: 1.4rem;
+      font-weight: 300;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 6vw, 4rem);
+      color: #fff;
+      font-weight: 600;
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      margin-bottom: 18px;
+      max-width: 720px;
+      padding: 0 20px;
+    }
+
+    .hero-sub {
+      color: rgba(255,255,255,0.85);
+      font-size: clamp(0.9rem, 2vw, 1.05rem);
+      font-weight: 300;
+      letter-spacing: 0.05em;
+      margin-bottom: 32px;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--dark);
+      font-family: 'Jost', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 14px 36px;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: background 0.25s, transform 0.2s;
+    }
+
+    .btn-primary:hover {
+      background: #d4b97a;
+      transform: translateY(-2px);
+    }
+
+    /* ── SECTIONS WRAPPER ── */
+    .container {
+      max-width: 1100px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    /* ── INTRO ── */
+    .intro {
+      background: var(--cream);
+      padding: 80px 0 70px;
+    }
+
+    .intro-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .intro-text {}
+    .intro-text .label {
+      display: inline-block;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 500;
+      margin-bottom: 16px;
+    }
+
+    .intro-text h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 600;
+      line-height: 1.2;
+      color: var(--dark);
+      margin-bottom: 20px;
+    }
+
+    .intro-text p {
+      font-size: 1rem;
+      line-height: 1.75;
+      color: var(--brown);
+      font-weight: 300;
+    }
+
+    .intro-image {
+      border-radius: 6px;
+      overflow: hidden;
+      background: transparent;
+    }
+
+    .intro-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 6px;
+      transition: transform 0.5s ease;
+    }
+    .intro-image:hover img { transform: scale(1.02); }
+
+    /* ── SOCIAL STRIP ── */
+    .social-strip {
+      background: var(--warm);
+      padding: 36px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .social-inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 36px;
+      flex-wrap: wrap;
+    }
+
+    .social-label {
+      color: var(--brown);
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .social-link {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--brown);
+      text-decoration: none;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      font-weight: 400;
+      padding: 8px 16px;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      transition: border-color 0.2s, background 0.2s, color 0.2s;
+    }
+
+    .social-link:hover {
+      border-color: var(--gold);
+      background: var(--gold);
+      color: #fff;
+    }
+
+    .social-link svg {
+      width: 16px; height: 16px;
+      fill: var(--gold);
+      flex-shrink: 0;
+      transition: fill 0.2s;
+    }
+
+    .social-link:hover svg {
+      fill: #fff;
+    }
+
+    /* ── TORTAS ── */
+    .tortas-section {
+      background: var(--light);
+      padding: 90px 0;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .section-header .label {
+      display: inline-block;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 500;
+      margin-bottom: 12px;
+    }
+
+    .section-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--dark);
+      font-weight: 600;
+    }
+
+    .tortas-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    /* ── CAKE CARD ── */
+    .cake-card {
+      background: #fff;
+      border-radius: 4px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      transition: box-shadow 0.3s, transform 0.3s;
+    }
+
+    .cake-card:hover {
+      box-shadow: 0 12px 40px rgba(44,31,20,0.12);
+      transform: translateY(-4px);
+    }
+
+    .cake-img {
+      position: relative;
+      aspect-ratio: 1/1;
+      overflow: hidden;
+      background: var(--warm);
+    }
+
+    .cake-img img {
+      width: 100%; height: 100%;
+      object-fit: contain;
+      object-position: center;
+      display: block;
+      transition: transform 0.5s ease;
+      padding: 8px;
+    }
+
+    .cake-card:hover .cake-img img { transform: scale(1.06); }
+
+    .cake-body {
+      padding: 24px 24px 28px;
+    }
+
+    .cake-body h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--dark);
+      margin-bottom: 10px;
+    }
+
+    .cake-body p {
+      font-size: 0.875rem;
+      line-height: 1.7;
+      color: var(--brown);
+      font-weight: 300;
+      margin-bottom: 20px;
+    }
+
+    /* ── PRICE DROPDOWN ── */
+    .price-accordion {
+      border-top: 1px solid var(--border);
+      padding-top: 16px;
+    }
+
+    .price-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      user-select: none;
+      padding: 2px 0;
+    }
+
+    .price-toggle-label {
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 500;
+      color: var(--accent);
+    }
+
+    .price-toggle-icon {
+      width: 20px; height: 20px;
+      border: 1.5px solid var(--gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+      flex-shrink: 0;
+    }
+
+    .price-toggle:hover .price-toggle-icon {
+      background: var(--gold);
+    }
+
+    .price-toggle-icon svg {
+      width: 10px; height: 10px;
+      fill: var(--gold);
+      transition: transform 0.3s, fill 0.2s;
+    }
+
+    .price-toggle:hover .price-toggle-icon svg {
+      fill: #fff;
+    }
+
+    .price-toggle.open .price-toggle-icon svg {
+      transform: rotate(180deg);
+    }
+
+    .price-list {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease, padding 0.25s ease;
+    }
+
+    .price-list.open {
+      max-height: 200px;
+      padding-top: 14px;
+    }
+
+    .price-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 7px 0;
+      border-bottom: 1px dashed rgba(122,92,68,0.15);
+      font-size: 0.875rem;
+    }
+
+    .price-row:last-child { border-bottom: none; }
+
+    .price-personas {
+      color: var(--brown);
+      font-weight: 400;
+    }
+
+    .price-valor {
+      font-weight: 500;
+      color: var(--dark);
+    }
+
+    /* ── FORM ── */
+    .form-section {
+      background: var(--warm);
+      padding: 90px 0;
+    }
+
+    .form-wrap {
+      max-width: 620px;
+      margin: 0 auto;
+    }
+
+    .form-wrap .section-header { margin-bottom: 40px; }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--brown);
+      font-weight: 500;
+      margin-bottom: 7px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid var(--border);
+      background: #fff;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.95rem;
+      color: var(--dark);
+      border-radius: 2px;
+      outline: none;
+      transition: border-color 0.2s;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--gold);
+    }
+
+    .form-group textarea { resize: vertical; min-height: 100px; }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+    .select-wrap {
+      position: relative;
+    }
+
+    .select-wrap::after {
+      content: '';
+      position: absolute;
+      right: 14px; top: 50%;
+      transform: translateY(-50%);
+      width: 0; height: 0;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 6px solid var(--brown);
+      pointer-events: none;
+    }
+
+    .form-submit {
+      width: 100%;
+      padding: 15px;
+      background: #C98A3A;
+      color: #F8F5EF;
+      border: none;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.82rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 500;
+      cursor: pointer;
+      border-radius: 2px;
+      margin-top: 8px;
+      transition: background 0.25s;
+    }
+
+    .form-submit:hover { background: #d9a050; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #F8F5EF;
+      padding: 44px 0 36px;
+      text-align: center;
+      border-top: 1px solid rgba(201,138,58,0.2);
+    }
+
+    .footer-brands {
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .footer-brand-riesco {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: #C98A3A;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .footer-brand-bottega {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 400;
+      font-style: italic;
+      color: #C98A3A;
+      letter-spacing: 0.04em;
+    }
+
+    .footer-dot {
+      width: 4px; height: 4px;
+      background: rgba(201,138,58,0.45);
+      border-radius: 50%;
+      display: inline-block;
+      margin-bottom: 3px;
+    }
+
+    .footer-copy {
+      color: rgba(107,79,58,0.45);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      font-weight: 300;
+    }
+
+    .footer-reserve-btn {
+      display: inline-block;
+      margin-bottom: 28px;
+      background: #C98A3A;
+      color: #F8F5EF;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 12px 32px;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: background 0.25s, transform 0.2s;
+    }
+
+    .footer-reserve-btn:hover {
+      background: #d9a050;
+      transform: translateY(-2px);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .intro-inner { grid-template-columns: 1fr; gap: 40px; }
+      .tortas-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 600px) {
+      .container { padding: 0 18px; }
+      .tortas-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .social-inner { gap: 14px; }
+      .social-links { flex-wrap: wrap; justify-content: center; }
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-overlay > * {
+      animation: fadeUp 0.9s ease both;
+    }
+
+    .hero-logo  { animation-delay: 0.1s; }
+    .hero h1    { animation-delay: 0.25s; }
+    .hero-sub   { animation-delay: 0.4s; }
+    .btn-primary { animation-delay: 0.55s; }
+
+    .divider {
+      width: 48px; height: 2px;
+      background: var(--gold);
+      margin: 0 auto 28px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <img
+    src="https://cdn.shopify.com/s/files/1/0659/2911/7922/files/ChatGPT_Image_24_abr_2026_12_31_10_0a2541da-aece-47ad-a251-a94e876c91fd.png?v=1777320944"
+    alt="La Bottega × Riesco"
+    loading="eager"
+  />
+  <div class="hero-overlay">
+    <div class="hero-logo">
+      <span>La Bottega</span>
+      <span class="sep">×</span>
+      <span>Riesco Repostería</span>
+    </div>
+    <h1>Celebra tu cumpleaños con el sabor de siempre</h1>
+    <p class="hero-sub">Gastronomía · Tradición · Momentos únicos</p>
+    <a href="#reserva" class="btn-primary">Haz tu reserva</a>
+  </div>
+</section>
+
+<!-- ═══ INTRO ═══ -->
+<section class="intro">
+  <div class="container">
+    <div class="intro-inner">
+      <div class="intro-text">
+        <span class="label">Una experiencia completa</span>
+        <h2>Lo mejor de la gastronomía con nuestros sabores de siempre</h2>
+        <p>
+          Celebra tu cumpleaños en Bottega junto a las tradicionales tortas de Riesco Repostería.
+          Haz tu reserva y disfruta una experiencia completa, combinando lo mejor de la gastronomía
+          con nuestros sabores de siempre.
+        </p>
+      </div>
+      <div class="intro-image">
+        <img
+          src="https://cdn.shopify.com/s/files/1/0659/2911/7922/files/riesco_con_btga_454c2174-a4de-4dcc-bb74-f30abbbc0934.jpg?v=1777321083"
+          alt="La Bottega y Riesco juntos"
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FORMULARIO ═══ -->
+<section class="form-section" id="reserva">
+  <div class="container">
+    <div class="section-header">
+      <span class="label">Pastelería Riesco</span>
+      <div class="divider"></div>
+      <h2>Nuestras tortas</h2>
+    </div>
+
+    <div class="tortas-grid">
+
+      <!-- Torta 1 -->
+      <div class="cake-card">
+        <div class="cake-img">
+          <img
+            src="https://cdn.shopify.com/s/files/1/0659/2911/7922/files/FBTORNAR10_Torta_Naranja_Huevo_Moll_2.jpg?v=1777496060"
+            alt="Torta Naranja Huevo Mol"
+            loading="lazy"
+          />
+        </div>
+        <div class="cake-body">
+          <h3>Torta Naranja Huevo Mol</h3>
+          <p>Torta de panqueques rellena con una suave crema de naranjas naturales, cubierta con delicado huevo mol de almendras. Una combinación fresca y refinada, ideal para quienes buscan un toque cítrico y artesanal.</p>
+          <div class="price-accordion">
+            <div class="price-toggle" onclick="togglePrice(this)">
+              <span class="price-toggle-label">Ver precios y tamaños</span>
+              <div class="price-toggle-icon">
+                <svg viewBox="0 0 10 6" xmlns="http://www.w3.org/2000/svg"><path d="M0 0l5 6 5-6z"/></svg>
+              </div>
+            </div>
+            <div class="price-list">
+              <div class="price-row">
+                <span class="price-personas">10 personas</span>
+                <span class="price-valor">$33.400</span>
+              </div>
+              <div class="price-row">
+                <span class="price-personas">15 personas</span>
+                <span class="price-valor">$45.500</span>
+              </div>
+              <div class="price-row">
+                <span class="price-personas">20 personas</span>
+                <span class="price-valor">$55.100</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Torta 2 -->
+      <div class="cake-card">
+        <div class="cake-img">
+          <img
+            src="https://cdn.shopify.com/s/files/1/0659/2911/7922/files/banner_torta_afc6f43d-b076-4208-93b7-9b9d9cdc8cd4.jpg?v=1764694769"
+            alt="Torta Nuez Manjar"
+            loading="lazy"
+          />
+        </div>
+        <div class="cake-body">
+          <h3>Torta Nuez Manjar</h3>
+          <p>Torta tradicional de panqueque y nuez, rellena con manjar casero. Intensa, suave y clásica, perfecta para reuniones familiares o celebraciones con sabor a tradición.</p>
+          <div class="price-accordion">
+            <div class="price-toggle" onclick="togglePrice(this)">
+              <span class="price-toggle-label">Ver precios y tamaños</span>
+              <div class="price-toggle-icon">
+                <svg viewBox="0 0 10 6" xmlns="http://www.w3.org/2000/svg"><path d="M0 0l5 6 5-6z"/></svg>
+              </div>
+            </div>
+            <div class="price-list">
+              <div class="price-row">
+                <span class="price-personas">6 personas</span>
+                <span class="price-valor">$15.200</span>
+              </div>
+              <div class="price-row">
+                <span class="price-personas">10 personas</span>
+                <span class="price-valor">$38.100</span>
+              </div>
+              <div class="price-row">
+                <span class="price-personas">15 personas</span>
+                <span class="price-valor">$51.200</span>
+              </div>
+              <div class="price-row">
+                <span class="price-personas">20 personas</span>
+                <span class="price-valor">$63.700</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Torta 3 -->
+      <div class="cake-card">
+        <div class="cake-img">
+          <img
+            src="https://cdn.shopify.com/s/files/1/0659/2911/7922/files/merengue_frambuesa_b3894b7c-80b6-4cf7-af6e-2428f6b0d682.jpg?v=1777495720"
+            alt="Torta Merengue Frambuesa"
+            loading="lazy"
+          />
+        </div>
+        <div class="cake-body">
+          <h3>Torta Merengue Frambuesa</h3>
+          <p>Delicada torta de merengue rellena con crema chantilly, frambuesas frescas y manjar. Perfecta para celebraciones primaverales o como un postre liviano y lleno de frescura.</p>
+          <div class="price-accordion">
+            <div class="price-toggle" onclick="togglePrice(this)">
+              <span class="price-toggle-label">Ver precios y tamaños</span>
+              <div class="price-toggle-icon">
+                <svg viewBox="0 0 10 6" xmlns="http://www.w3.org/2000/svg"><path d="M0 0l5 6 5-6z"/></svg>
+              </div>
+            </div>
+            <div class="price-list">
+              <div class="price-row">
+                <span class="price-personas">6 personas</span>
+                <span class="price-valor">$15.200</span>
+              </div>
+              <div class="price-row">
+                <span class="price-personas">10 personas</span>
+                <span class="price-valor">$29.500</span>
+              </div>
+              <div class="price-row">
+                <span class="price-personas">15 personas</span>
+                <span class="price-valor">$39.400</span>
+              </div>
+              <div class="price-row">
+                <span class="price-personas">20 personas</span>
+                <span class="price-valor">$52.900</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /tortas-grid -->
+  </div>
+</section>
+
+<!-- ═══ FORMULARIO ═══ -->
+<section class="form-section" id="reserva">
+  <div class="container">
+    <div class="form-wrap">
+      <div class="section-header">
+        <span class="label">Reservas</span>
+        <div class="divider"></div>
+        <h2>Haz tu reserva</h2>
+      </div>
+
+      <form id="reserva-form" onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required />
+          </div>
+          <div class="form-group">
+            <label for="apellido">Apellido</label>
+            <input type="text" id="apellido" name="apellido" placeholder="Tu apellido" required />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Tu correo electrónico</label>
+          <input type="email" id="email" name="email" placeholder="tu@correo.cl" required />
+        </div>
+
+        <div class="form-group">
+          <label for="telefono">Teléfono</label>
+          <input type="tel" id="telefono" name="telefono" placeholder="+56 9 0000 0000" />
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="fecha">Fecha del evento</label>
+            <input type="date" id="fecha" name="fecha" required />
+          </div>
+          <div class="form-group">
+            <label for="personas">N° de personas</label>
+            <div class="select-wrap">
+              <select id="personas" name="personas">
+                <option value="">Seleccionar</option>
+                <option value="6">6 personas</option>
+                <option value="10">10 personas</option>
+                <option value="15">15 personas</option>
+                <option value="20">20 personas</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="torta">Torta</label>
+          <div class="select-wrap">
+            <select id="torta" name="torta">
+              <option value="">Seleccionar torta</option>
+              <option value="Torta Naranja Huevo Mol">Torta Naranja Huevo Mol</option>
+              <option value="Torta Nuez Manjar">Torta Nuez Manjar</option>
+              <option value="Torta Merengue Frambuesa">Torta Merengue Frambuesa</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="mensaje">Comentarios adicionales</label>
+          <textarea id="mensaje" name="mensaje" placeholder="Cuéntanos algo más sobre tu celebración..."></textarea>
+        </div>
+
+        <button type="submit" class="form-submit">Enviar reserva</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SOCIAL ═══ -->
+<div class="social-strip">
+  <div class="container">
+    <div class="social-inner">
+      <span class="social-label">Encuéntranos en</span>
+      <div class="social-links">
+
+        <a href="https://www.instagram.com/riescoreposteria" target="_blank" rel="noopener" class="social-link">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          Instagram Riesco
+        </a>
+
+        <a href="https://www.facebook.com/tpriesco" target="_blank" rel="noopener" class="social-link">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          Facebook Riesco
+        </a>
+
+        <a href="https://labottega.cl" target="_blank" rel="noopener" class="social-link">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm-1 21.945A10.018 10.018 0 012.055 13H5c.274 2.584 1.318 4.912 3 6.707V21.945zM11 11H5.055A10.018 10.018 0 0111 2.055V11zm0-10.945V3A10.02 10.02 0 008.293 5.293C6.682 7.04 5.648 9.385 5.055 11H2.055A10.018 10.018 0 0111 .055zM13 2.055A10.018 10.018 0 0121.945 11H19c-.593-1.615-1.627-3.96-3.293-5.707A10.02 10.02 0 0013 3V2.055zm0 19.89V19a10.02 10.02 0 002.707-1.293C17.373 15.96 18.407 13.615 19 12h2.945A10.018 10.018 0 0113 21.945zM13 11V2.055c2.196.56 4.164 2.59 5.293 5.652.443 1.17.707 2.165.707 3.293H13zm0 2h6c0 1.128-.264 2.123-.707 3.293C17.164 19.355 15.196 21.385 13 21.945V13zm-2 0v8.945C8.804 21.385 6.836 19.355 5.707 16.293 5.264 15.123 5 14.128 5 13h6z"/></svg>
+          labottega.cl
+        </a>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="container">
+    <div class="footer-brands">
+      <span class="footer-brand-riesco">Riesco</span>
+      <span class="footer-dot"></span>
+      <span class="footer-brand-bottega">la Bottega Gandolini</span>
+    </div>
+    <p class="footer-copy">Una experiencia de sabor y celebración · Santiago, Chile</p>
+  </div>
+</footer>
+
+<script>
+  function togglePrice(toggle) {
+    const list = toggle.nextElementSibling;
+    const isOpen = list.classList.contains('open');
+
+    // Cerrar todos primero
+    document.querySelectorAll('.price-list.open').forEach(el => el.classList.remove('open'));
+    document.querySelectorAll('.price-toggle.open').forEach(el => {
+      el.classList.remove('open');
+      el.querySelector('.price-toggle-label').textContent = 'Ver precios y tamaños';
+    });
+
+    if (!isOpen) {
+      list.classList.add('open');
+      toggle.classList.add('open');
+      toggle.querySelector('.price-toggle-label').textContent = 'Ver precios y tamaños';
+    }
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    const f = e.target;
+    const nombre   = f.nombre.value;
+    const apellido = f.apellido.value;
+    const email    = f.email.value;
+    const telefono = f.telefono.value || 'No indicado';
+    const fecha    = f.fecha.value || 'No indicada';
+    const personas = f.personas.value || 'No indicado';
+    const torta    = f.torta.value   || 'No seleccionada';
+    const mensaje  = f.mensaje.value || 'Sin comentarios';
+
+    const subject = encodeURIComponent(`Reserva cumpleaños - ${nombre} ${apellido} - ${fecha}`);
+    const body = encodeURIComponent(
+      `Nueva reserva desde la landing page La Bottega × Riesco:\n\n` +
+      `👤 Nombre: ${nombre} ${apellido}\n` +
+      `📧 Correo cliente: ${email}\n` +
+      `📞 Teléfono: ${telefono}\n` +
+      `📅 Fecha del evento: ${fecha}\n` +
+      `👥 Personas: ${personas}\n` +
+      `🎂 Torta: ${torta}\n\n` +
+      `💬 Comentarios:\n${mensaje}`
+    );
+
+    // ← Reemplaza con el correo real de La Bottega
+    const destinatario = 'reservas@labottega.cl';
+    window.location.href = `mailto:${destinatario}?subject=${subject}&body=${body}`;
+
+    const btn = f.querySelector('.form-submit');
+    btn.textContent = '¡Abriendo correo...';
+    btn.style.background = '#5a7a52';
+    setTimeout(() => {
+      btn.textContent = 'Enviar reserva';
+      btn.style.background = '';
+      f.reset();
+    }, 3000);
+  }
+</script>
+
+</body>
+</html>
